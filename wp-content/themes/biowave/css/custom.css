@@ -827,6 +827,7 @@ aside.right-box .widget {
 		margin: 0 .5em;
 		display: inline-block;
 	}
+	
 	.footer-basic-centered {
 		padding: 35px;
 	}
@@ -844,5 +845,10 @@ aside.right-box .widget {
 	}
 	.footer-basic-centered .footer-links a {
 		line-height: 1.8;
+	}
+}
+@media screen and (max-width:600px) {
+	.breadcrumb {
+		display: none
 	}
 }
