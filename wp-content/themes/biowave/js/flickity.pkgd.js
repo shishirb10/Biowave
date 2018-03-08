@@ -3361,6 +3361,7 @@ PageDots.prototype._create = function() {
   this.holder.className = 'flickity-page-dots';
   // create dots, array of elements
   this.dots = [];
+  
   // events
   this.on( 'tap', this.onTap );
   this.on( 'pointerDown', this.parent.childUIPointerDown.bind( this.parent ) );
@@ -3394,13 +3395,19 @@ PageDots.prototype.addDots = function( count ) {
   var newDots = [];
   var length = this.dots.length;
   var max = length + count;
+  
+  if (max <= 1) {
+   
+  } else {
+    for (var i = length; i < max; i++) {
+      var dot = document.createElement('li');
+      dot.className = 'dot';
+      dot.setAttribute('aria-label', 'Page dot ' + (i + 1));
+      fragment.appendChild(dot);
+      newDots.push(dot);
+  }
 
-  for ( var i = length; i < max; i++ ) {
-    var dot = document.createElement('li');
-    dot.className = 'dot';
-    dot.setAttribute( 'aria-label', 'Page dot ' + ( i + 1 ) );
-    fragment.appendChild( dot );
-    newDots.push( dot );
+  
   }
 
   this.holder.appendChild( fragment );

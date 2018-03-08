@@ -1,5 +1,12 @@
 <?php
-	
+	function theme_styles()  
+	{ 	
+	 // Load all of the styles that need to appear on all pages
+	 wp_enqueue_style( 'normalize', get_template_directory_uri() . '/css/normalize.css' );	 
+	 wp_enqueue_style( 'font-awesome', 'http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' );
+	 wp_enqueue_style( 'custom', get_template_directory_uri() . '/css/custom.css' );	
+	}
+	add_action('wp_enqueue_scripts', 'theme_styles');
 
 	function add_my_script() {	
 		wp_enqueue_script('jquery.min', get_template_directory_uri() . '/js/jquery.min.js', array('jquery') );	
@@ -205,6 +212,14 @@ add_action('customize_register', 'biowave_customize_register');
     function remove_wp_logo( $wp_admin_bar ) {
         $wp_admin_bar->remove_node( 'wp-logo' );
 	}	
-	add_theme_support( 'custom-logo' );
+    add_theme_support( 'custom-logo' );
+    // show our custom image sizes when inserting media
+function butter_show_image_sizes($sizes) {
+  $sizes['butter-regular'] = __( 'Our Regular Size', 'butter' );
+  $sizes['butter-medium'] = __( 'Our Medium Size', 'butter' );
+  $sizes['butter-large'] = __( 'Our Large Size', 'butter' );
+  return $sizes;
+}
+add_filter('image_size_names_choose', 'butter_show_image_sizes');
 
 ?>

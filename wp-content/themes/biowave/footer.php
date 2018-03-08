@@ -4,17 +4,31 @@
 
 	</div>
 
-	<?php wp_footer(); ?>
-			<?php $args = array(
-		 'posts_per_page'   => 3,
+	<?php wp_footer();?>
+<?php
+	if ( is_singular('post') ) {
+  $val = get_field('relation',$post->ID);
+	//print_r($val);
+	$args = array(
+		 'posts_per_page'   => 5,
+		 'orderby'          => 'date',
+		 'order'            => 'DESC',
+		 'post_type'        => 'testimonial',
+		 'post_status'      => 'publish',
+		 'post__in'          => $val, 
+		);		
+} else {
+  $args = array(
+		 'posts_per_page'   => 5,
 		 'orderby'          => 'date',
 		 'order'            => 'DESC',
 		 'post_type'        => 'testimonial',
 		 'post_status'      => 'publish',
 		);
-		$testimonial_array = get_posts( $args ); 
-	//	print_r ($testimonial_array );
-				
+	
+}		
+$testimonial_array = get_posts( $args ); 
+	//	print_r ($testimonial_array );	
 		?>
 		<div class="container-fulid">
 			<div class="testimonial-main">
@@ -30,34 +44,33 @@
 						
 					</div>
 				</div>
-				<?php  }	?>	
-						
+				<?php  }	?>							
 		</div>
 		<a class="testimonial-more" href="<?php the_permalink() ?>"> More Testimonial</a></div>	
 	<footer class="footer-basic-centered">
 	 	<?php print_r ($wp_customize);?>
-			<p class="footer-company-logo"><img src="<?php  echo get_theme_mod( 'footer-logo' ); ?>" alt="Company" /></p>
+			<p class="footer-company-logo"><a href="<?php echo get_home_url();?>"><img src="<?php  echo get_theme_mod( 'footer-logo' ); ?>" alt="Company" /></a></p>
 			<p class="footer-company-detail">
 				<span><?php echo get_theme_mod( 'footer_contact' );?></span>
 				<span><?php echo '<a href="mailto:'.get_theme_mod('footer_email').'">'. get_theme_mod('footer_email'). '</a>'; ?></span>
 				<span class="social-icon">
 				<?php if(get_theme_mod( 'facebook_link' ) != "") { ?>
-					<a href="<?php echo get_theme_mod( 'facebook_link' );?>">
+					<a href="<?php echo get_theme_mod( 'facebook_link' );?>" target="_blank">
 						<i class="fa fa-facebook"></i>						
 					</a>
 				<?php } ?>
 				<?php if(get_theme_mod( 'twitter_link' ) != "") { ?>
-				<a href="<?php echo get_theme_mod( 'twitter_link' );?>">
+				<a href="<?php echo get_theme_mod( 'twitter_link' );?>" target="_blank">
 					<i class="fa fa-twitter"></i>					
 				</a>
 				<?php } ?>
 				<?php if(get_theme_mod( 'youtube_link' ) != "") { ?>
-				<a href="<?php echo get_theme_mod( 'youtube_link' );?>">
+				<a href="<?php echo get_theme_mod( 'youtube_link' );?>" target="_blank">
 					<i class="fa fa-youtube-play"></i>					
 				</a>
 				<?php } ?>
 				<?php if(get_theme_mod( 'instagram_link' ) != "") { ?>
-				<a href="<?php echo get_theme_mod( 'instagram_link' );?>">
+				<a href="<?php echo get_theme_mod( 'instagram_link' );?>" target="_blank">
 					<i class="fa fa-instagram"></i>					
 				</a>
 				<?php } ?>
@@ -65,7 +78,10 @@
 			</p>
 			<?php wp_nav_menu( array('theme_location' => 'secondary','menu_class' => 'footer-links') ); ?>
 	<p class="footer-company-name">
-	 &copy; <?php echo get_theme_mod( 'copyright_textbox' );?>
+	 &copy; <?php echo get_theme_mod( 'copyright_textbox' );
+	 
+	  
+	 ?>
 </p>
 		
 		

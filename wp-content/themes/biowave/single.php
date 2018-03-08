@@ -1,4 +1,6 @@
-<?php get_header(); ?>
+<?php get_header(); 
+
+?>
 		<div class="container">
 			<h1><?php the_category('&bull;'); ?></h1>
 				<section>

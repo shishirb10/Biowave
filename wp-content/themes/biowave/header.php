@@ -49,7 +49,7 @@
 						$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
 
 						if ( has_custom_logo() ) {
-						echo '<h1 class="logo"><img src="'. esc_url( $logo[0] ) .'"></h1>';
+						echo '<h1 class="logo"><a href="'.get_home_url().'"><img src="'. esc_url( $logo[0] ) .'"></a></h1>';
 						} else {
 						echo '<h1 class="logo">'. get_bloginfo( 'name' ) .'</h1>';
 						}
